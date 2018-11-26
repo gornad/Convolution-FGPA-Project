@@ -1,0 +1,34 @@
+<AutoPilot:ProjectResources xmlns:AutoPilot="com.autoesl.autopilot.ui.directiveView">
+<sourceFile name="">
+<directive functionLabel="" functionName="fpga_convolution" label="">
+<pragma name="INTERFACE">
+<option name="m_axi" positionalBoolean="mode" value=""/>
+<option name="depth" value="65536"/>
+<option name="port" positionalBoolean="4" value="image"/>
+<option name="offset" value="slave"/>
+</pragma>
+</directive>
+<directive functionLabel="" functionName="fpga_convolution" label="">
+<pragma name="INTERFACE">
+<option name="m_axi" positionalBoolean="mode" value=""/>
+<option name="depth" value="121"/>
+<option name="port" positionalBoolean="4" value="kernel"/>
+<option name="offset" value="slave"/>
+</pragma>
+</directive>
+<directive functionLabel="" functionName="fpga_convolution" label="">
+<pragma name="INTERFACE">
+<option name="m_axi" positionalBoolean="mode" value=""/>
+<option name="depth" value="65536"/>
+<option name="port" positionalBoolean="4" value="output"/>
+<option name="offset" value="slave"/>
+</pragma>
+</directive>
+<directive functionLabel="" functionName="fpga_convolution" label="">
+<pragma name="INTERFACE">
+<option name="s_axilite" positionalBoolean="mode" value=""/>
+<option name="port" positionalBoolean="4" value="return"/>
+</pragma>
+</directive>
+</sourceFile>
+</AutoPilot:ProjectResources>

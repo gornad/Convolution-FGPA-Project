@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [SYN 201-107] Renaming port name 'fpga_convolution/output' to 'fpga_convolution/output_r' to avoid the conflict with HDL keywords or other object names." projectName="LAB4" solutionName="solution1" date="2018-03-21T11:22:33.212-0400" type="Warning"/>
+        <logs message="WARNING: [SYN 201-107] Renaming port name 'fpga_convolution/image' to 'fpga_convolution/image_r' to avoid the conflict with HDL keywords or other object names." projectName="LAB4" solutionName="solution1" date="2018-03-21T11:22:33.206-0400" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>

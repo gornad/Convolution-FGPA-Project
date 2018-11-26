@@ -1,0 +1,871 @@
+
+
+================================================================
+== Vivado HLS Report for 'fpga_convolution'
+================================================================
+* Date:           Wed Mar 21 11:22:33 2018
+
+* Version:        2017.2 (Build 1909853 on Thu Jun 15 18:55:24 MDT 2017)
+* Project:        LAB4
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg484-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|      8.75|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |    ?|    ?|    ?|    ?|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+------+------+----------+-----------+-----------+------+----------+
+        |                 |   Latency   | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |  min |  max |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+------+------+----------+-----------+-----------+------+----------+
+        |- Loop 1         |     ?|     ?|  11 ~ 13 |          -|          -|     ?|    no    |
+        | + Loop 1.1      |    10|    10|         1|          -|          -|    10|    no    |
+        |- Loop 2         |  2660|  2660|         1|          -|          -|  2660|    no    |
+        |- Loop 3         |     ?|     ?|      1483|          -|          -|     ?|    no    |
+        | + Loop 3.1      |  1474|  1474|       134|          -|          -|    11|    no    |
+        |  ++ Loop 3.1.1  |   132|   132|        12|          -|          -|    11|    no    |
+        +-----------------+------+------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states: 35
+* Pipeline: 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (tmp & !icmp)
+	12  / (tmp & icmp)
+	14  / (!tmp)
+3 --> 
+	4  / true
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+	11  / true
+11 --> 
+	13  / true
+12 --> 
+	12  / (!exitcond3)
+	13  / (exitcond3)
+13 --> 
+	2  / true
+14 --> 
+	14  / (!exitcond2)
+	15  / (exitcond2)
+15 --> 
+	16  / (tmp_7)
+16 --> 
+	29  / (exitcond1)
+	17  / (!exitcond1)
+17 --> 
+	18  / (!exitcond)
+	16  / (exitcond)
+18 --> 
+	19  / true
+19 --> 
+	20  / true
+20 --> 
+	21  / true
+21 --> 
+	22  / true
+22 --> 
+	23  / true
+23 --> 
+	24  / true
+24 --> 
+	25  / true
+25 --> 
+	26  / true
+26 --> 
+	27  / true
+27 --> 
+	28  / true
+28 --> 
+	17  / true
+29 --> 
+	30  / true
+30 --> 
+	31  / true
+31 --> 
+	32  / true
+32 --> 
+	33  / true
+33 --> 
+	34  / true
+34 --> 
+	35  / true
+35 --> 
+	15  / true
+* FSM state operations: 
+
+ <State 1>: 1.59ns
+ST_1: image_count (5)  [1/1] 0.00ns
+:0  %image_count = alloca i32
+
+ST_1: output_read (6)  [1/1] 1.00ns
+:1  %output_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %output_r)
+
+ST_1: kernel_read (7)  [1/1] 1.00ns
+:2  %kernel_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %kernel)
+
+ST_1: image_read (8)  [1/1] 1.00ns
+:3  %image_read = call i32 @_ssdm_op_Read.s_axilite.i32(i32 %image_r)
+
+ST_1: tmp_1 (9)  [1/1] 0.00ns
+:4  %tmp_1 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %output_read, i32 2, i32 31)
+
+ST_1: tmp_3_cast (10)  [1/1] 0.00ns
+:5  %tmp_3_cast = zext i30 %tmp_1 to i31
+
+ST_1: tmp_2 (11)  [1/1] 0.00ns
+:6  %tmp_2 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %kernel_read, i32 2, i32 31)
+
+ST_1: tmp_6_cast (12)  [1/1] 0.00ns
+:7  %tmp_6_cast = zext i30 %tmp_2 to i31
+
+ST_1: image1 (13)  [1/1] 0.00ns
+:8  %image1 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %image_read, i32 2, i32 31)
+
+ST_1: tmp_s (14)  [1/1] 0.00ns
+:9  %tmp_s = zext i30 %image1 to i32
+
+ST_1: StgValue_46 (15)  [1/1] 0.00ns
+:10  call void (...)* @_ssdm_op_SpecBitsMap(i32* %gmem), !map !18
+
+ST_1: StgValue_47 (16)  [1/1] 0.00ns
+:11  call void (...)* @_ssdm_op_SpecTopModule([17 x i8]* @fpga_convolution_str) nounwind
+
+ST_1: StgValue_48 (17)  [1/1] 0.00ns
+:12  call void (...)* @_ssdm_op_SpecInterface(i32* %gmem, [6 x i8]* @p_str, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 65536, [1 x i8]* @p_str1, [6 x i8]* @p_str2, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1)
+
+ST_1: StgValue_49 (18)  [1/1] 0.00ns
+:13  call void (...)* @_ssdm_op_SpecInterface(i32 %image_r, [10 x i8]* @mode, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 65536, [1 x i8]* @bundle, [6 x i8]* @p_str2, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1)
+
+ST_1: StgValue_50 (19)  [1/1] 0.00ns
+:14  call void (...)* @_ssdm_op_SpecInterface(i32 %kernel, [10 x i8]* @mode3, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 121, [1 x i8]* @bundle4, [6 x i8]* @p_str2, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1)
+
+ST_1: StgValue_51 (20)  [1/1] 0.00ns
+:15  call void (...)* @_ssdm_op_SpecInterface(i32 %output_r, [10 x i8]* @mode5, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 65536, [1 x i8]* @bundle6, [6 x i8]* @p_str2, [1 x i8]* @p_str1, i32 16, i32 16, i32 16, i32 16, [1 x i8]* @p_str1, [1 x i8]* @p_str1)
+
+ST_1: StgValue_52 (21)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:7
+:16  call void (...)* @_ssdm_op_SpecInterface(i32 0, [10 x i8]* @p_str3, i32 0, i32 0, [1 x i8]* @p_str1, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1, [1 x i8]* @p_str1, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str1, [1 x i8]* @p_str1) nounwind
+
+ST_1: empty (22)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:13
+:17  %empty = alloca [70756 x i32], align 4
+
+ST_1: StgValue_54 (23)  [1/1] 1.59ns
+:18  store i32 0, i32* %image_count
+
+ST_1: StgValue_55 (24)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:26
+:19  br label %1
+
+
+ <State 2>: 4.49ns
+ST_2: flag (26)  [1/1] 0.00ns
+:0  %flag = phi i32 [ 0, %0 ], [ %flag_3, %8 ]
+
+ST_2: pos (27)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:26
+:1  %pos = phi i32 [ 0, %0 ], [ %tmp_9, %8 ]
+
+ST_2: tmp (28)  [1/1] 3.26ns  loc: LAB4/convolution.cpp:26
+:2  %tmp = icmp slt i32 %pos, 68096
+
+ST_2: StgValue_59 (29)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:26
+:3  br i1 %tmp, label %2, label %.preheader5.preheader
+
+ST_2: tmp_3 (31)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:29
+:0  %tmp_3 = call i24 @_ssdm_op_PartSelect.i24.i32.i32.i32(i32 %flag, i32 8, i32 31)
+
+ST_2: icmp (32)  [1/1] 3.23ns  loc: LAB4/convolution.cpp:29
+:1  %icmp = icmp sgt i24 %tmp_3, 0
+
+ST_2: StgValue_62 (33)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:29
+:2  br i1 %icmp, label %3, label %7
+
+ST_2: image_count_load (35)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:42
+:0  %image_count_load = load i32* %image_count
+
+ST_2: image2_sum (36)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:42
+:1  %image2_sum = add i32 %tmp_s, %image_count_load
+
+ST_2: image_count_1 (42)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:42
+:7  %image_count_1 = add nsw i32 %image_count_load, 1
+
+ST_2: StgValue_66 (43)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:42
+:8  store i32 %image_count_1, i32* %image_count
+
+ST_2: pos_3 (46)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:26
+:0  %pos_3 = add i32 %pos, 10
+
+ST_2: StgValue_68 (47)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:30
+:1  br label %4
+
+ST_2: StgValue_69 (68)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:48
+.preheader5.preheader:0  br label %.preheader5
+
+
+ <State 3>: 8.75ns
+ST_3: gmem_addr (37)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:42
+:2  %gmem_addr = getelementptr i32* %gmem, i32 %image2_sum
+
+ST_3: gmem_load_req (38)  [7/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 4>: 8.75ns
+ST_4: gmem_load_req (38)  [6/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 5>: 8.75ns
+ST_5: gmem_load_req (38)  [5/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 6>: 8.75ns
+ST_6: gmem_load_req (38)  [4/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 7>: 8.75ns
+ST_7: gmem_load_req (38)  [3/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 8>: 8.75ns
+ST_8: gmem_load_req (38)  [2/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 9>: 8.75ns
+ST_9: gmem_load_req (38)  [1/7] 8.75ns  loc: LAB4/convolution.cpp:41
+:3  %gmem_load_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr, i32 1)
+
+
+ <State 10>: 8.75ns
+ST_10: gmem_addr_read (39)  [1/1] 8.75ns  loc: LAB4/convolution.cpp:41
+:4  %gmem_addr_read = call i32 @_ssdm_op_Read.m_axi.i32P(i32* %gmem_addr)
+
+
+ <State 11>: 3.25ns
+ST_11: p_addr (40)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:41
+:5  %p_addr = getelementptr inbounds [70756 x i32]* %empty, i32 0, i32 %pos
+
+ST_11: StgValue_80 (41)  [1/1] 3.25ns  loc: LAB4/convolution.cpp:41
+:6  store i32 %gmem_addr_read, i32* %p_addr, align 4
+
+ST_11: StgValue_81 (44)  [1/1] 1.59ns
+:9  br label %8
+
+
+ <State 12>: 4.49ns
+ST_12: pos_1 (49)  [1/1] 0.00ns
+:0  %pos_1 = phi i32 [ %pos, %3 ], [ %pos_6, %5 ]
+
+ST_12: exitcond3 (50)  [1/1] 3.26ns  loc: LAB4/convolution.cpp:30
+:1  %exitcond3 = icmp eq i32 %pos_1, %pos_3
+
+ST_12: empty_5 (51)  [1/1] 0.00ns
+:2  %empty_5 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 10, i64 10, i64 10) nounwind
+
+ST_12: StgValue_85 (52)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:30
+:3  br i1 %exitcond3, label %6, label %5
+
+ST_12: p_addr_2 (54)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:31
+:0  %p_addr_2 = getelementptr inbounds [70756 x i32]* %empty, i32 0, i32 %pos_1
+
+ST_12: StgValue_87 (55)  [1/1] 3.25ns  loc: LAB4/convolution.cpp:31
+:1  store i32 0, i32* %p_addr_2, align 4
+
+ST_12: pos_6 (56)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:32
+:2  %pos_6 = add nsw i32 %pos_1, 1
+
+ST_12: StgValue_89 (57)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:30
+:3  br label %4
+
+ST_12: pos_5 (59)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:39
+:0  %pos_5 = add i32 %pos, 9
+
+ST_12: StgValue_91 (60)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:40
+:1  br label %8
+
+
+ <State 13>: 2.90ns
+ST_13: flag_1 (62)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:44 (grouped into LUT with out node flag_3)
+:0  %flag_1 = phi i32 [ -1, %6 ], [ %flag, %7 ]
+
+ST_13: pos_2 (63)  [1/1] 0.00ns (grouped into LUT with out node tmp_9)
+:1  %pos_2 = phi i32 [ %pos_5, %6 ], [ %pos, %7 ]
+
+ST_13: flag_3 (64)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:44 (out node of the LUT)
+:2  %flag_3 = add nsw i32 %flag_1, 1
+
+ST_13: tmp_9 (65)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:26 (out node of the LUT)
+:3  %tmp_9 = add nsw i32 %pos_2, 1
+
+ST_13: StgValue_96 (66)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:26
+:4  br label %1
+
+
+ <State 14>: 3.25ns
+ST_14: pos1 (70)  [1/1] 0.00ns
+.preheader5:0  %pos1 = phi i17 [ %pos_4, %9 ], [ -62976, %.preheader5.preheader ]
+
+ST_14: pos1_cast6 (71)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:48
+.preheader5:1  %pos1_cast6 = zext i17 %pos1 to i32
+
+ST_14: exitcond2 (72)  [1/1] 3.05ns  loc: LAB4/convolution.cpp:48
+.preheader5:2  %exitcond2 = icmp eq i17 %pos1, -60316
+
+ST_14: empty_6 (73)  [1/1] 0.00ns
+.preheader5:3  %empty_6 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 2660, i64 2660, i64 2660) nounwind
+
+ST_14: StgValue_101 (74)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:48
+.preheader5:4  br i1 %exitcond2, label %.preheader4.preheader, label %9
+
+ST_14: p_addr_1 (76)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:49
+:0  %p_addr_1 = getelementptr inbounds [70756 x i32]* %empty, i32 0, i32 %pos1_cast6
+
+ST_14: StgValue_103 (77)  [1/1] 3.25ns  loc: LAB4/convolution.cpp:49
+:1  store i32 0, i32* %p_addr_1, align 4
+
+ST_14: pos_4 (78)  [1/1] 2.43ns  loc: LAB4/convolution.cpp:48
+:2  %pos_4 = add i17 %pos1, 1
+
+ST_14: StgValue_105 (79)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:48
+:3  br label %.preheader5
+
+ST_14: StgValue_106 (81)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:58
+.preheader4.preheader:0  br label %.preheader4
+
+
+ <State 15>: 5.30ns
+ST_15: flag_2 (83)  [1/1] 0.00ns
+.preheader4:0  %flag_2 = phi i32 [ %flag_4, %12 ], [ 0, %.preheader4.preheader ]
+
+ST_15: counter (84)  [1/1] 0.00ns
+.preheader4:1  %counter = phi i17 [ %counter_1, %12 ], [ 0, %.preheader4.preheader ]
+
+ST_15: position (85)  [1/1] 0.00ns
+.preheader4:2  %position = phi i32 [ %position_2, %12 ], [ 0, %.preheader4.preheader ]
+
+ST_15: counter_cast_cast (86)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:58
+.preheader4:3  %counter_cast_cast = zext i17 %counter to i31
+
+ST_15: tmp_7 (87)  [1/1] 3.26ns  loc: LAB4/convolution.cpp:58
+.preheader4:4  %tmp_7 = icmp slt i32 %position, 68086
+
+ST_15: counter_1 (88)  [1/1] 2.43ns  loc: LAB4/convolution.cpp:74
+.preheader4:5  %counter_1 = add i17 %counter, 1
+
+ST_15: StgValue_113 (89)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:58
+.preheader4:6  br i1 %tmp_7, label %10, label %13
+
+ST_15: tmp_5 (91)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:61
+:0  %tmp_5 = call i24 @_ssdm_op_PartSelect.i24.i32.i32.i32(i32 %flag_2, i32 8, i32 31)
+
+ST_15: icmp1 (92)  [1/1] 3.23ns  loc: LAB4/convolution.cpp:61
+:1  %icmp1 = icmp sgt i24 %tmp_5, 0
+
+ST_15: position_1 (93)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:63
+:2  %position_1 = add nsw i32 10, %position
+
+ST_15: p_position (94)  [1/1] 2.07ns  loc: LAB4/convolution.cpp:61
+:3  %p_position = select i1 %icmp1, i32 %position_1, i32 %position
+
+ST_15: tmp_6 (95)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+:4  %tmp_6 = trunc i32 %p_position to i18
+
+ST_15: StgValue_119 (96)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:67
+:5  br label %.loopexit
+
+ST_15: StgValue_120 (150)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:86
+:0  ret void
+
+
+ <State 16>: 4.97ns
+ST_16: tempsum_1 (98)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:69
+.loopexit:0  %tempsum_1 = phi i32 [ 0, %10 ], [ %tempsum_2, %.loopexit.loopexit ]
+
+ST_16: column (99)  [1/1] 0.00ns
+.loopexit:1  %column = phi i4 [ 0, %10 ], [ %column_1, %.loopexit.loopexit ]
+
+ST_16: column_cast5 (100)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+.loopexit:2  %column_cast5 = zext i4 %column to i7
+
+ST_16: column_cast4 (101)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+.loopexit:3  %column_cast4 = zext i4 %column to i18
+
+ST_16: exitcond1 (102)  [1/1] 3.10ns  loc: LAB4/convolution.cpp:67
+.loopexit:4  %exitcond1 = icmp eq i4 %column, -5
+
+ST_16: empty_7 (103)  [1/1] 0.00ns
+.loopexit:5  %empty_7 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 11, i64 11, i64 11) nounwind
+
+ST_16: column_1 (104)  [1/1] 2.35ns  loc: LAB4/convolution.cpp:67
+.loopexit:6  %column_1 = add i4 %column, 1
+
+ST_16: StgValue_128 (105)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+.loopexit:7  br i1 %exitcond1, label %12, label %.preheader.preheader
+
+ST_16: StgValue_129 (107)  [1/1] 1.59ns  loc: LAB4/convolution.cpp:68
+.preheader.preheader:0  br label %.preheader
+
+ST_16: output6_sum (139)  [1/1] 2.82ns  loc: LAB4/convolution.cpp:58
+:0  %output6_sum = add i31 %tmp_3_cast, %counter_cast_cast
+
+ST_16: flag_2_op (145)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:77
+:6  %flag_2_op = add i32 %flag_2, 1
+
+ST_16: flag_4 (146)  [1/1] 2.07ns  loc: LAB4/convolution.cpp:77
+:7  %flag_4 = select i1 %icmp1, i32 1, i32 %flag_2_op
+
+ST_16: position_2 (147)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:58
+:8  %position_2 = add nsw i32 %p_position, 1
+
+
+ <State 17>: 5.14ns
+ST_17: tempsum_2 (109)  [1/1] 0.00ns
+.preheader:0  %tempsum_2 = phi i32 [ %tempsum, %11 ], [ %tempsum_1, %.preheader.preheader ]
+
+ST_17: row (110)  [1/1] 0.00ns
+.preheader:1  %row = phi i4 [ %row_1, %11 ], [ 0, %.preheader.preheader ]
+
+ST_17: phi_mul (111)  [1/1] 0.00ns
+.preheader:2  %phi_mul = phi i12 [ %next_mul, %11 ], [ 0, %.preheader.preheader ]
+
+ST_17: phi_mul7 (112)  [1/1] 0.00ns
+.preheader:3  %phi_mul7 = phi i7 [ %next_mul8, %11 ], [ 0, %.preheader.preheader ]
+
+ST_17: exitcond (113)  [1/1] 3.10ns  loc: LAB4/convolution.cpp:68
+.preheader:4  %exitcond = icmp eq i4 %row, -5
+
+ST_17: empty_8 (114)  [1/1] 0.00ns
+.preheader:5  %empty_8 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 11, i64 11, i64 11) nounwind
+
+ST_17: row_1 (115)  [1/1] 2.35ns  loc: LAB4/convolution.cpp:68
+.preheader:6  %row_1 = add i4 %row, 1
+
+ST_17: StgValue_141 (116)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:68
+.preheader:7  br i1 %exitcond, label %.loopexit.loopexit, label %11
+
+ST_17: next_mul (118)  [1/1] 2.33ns
+:0  %next_mul = add i12 %phi_mul, 266
+
+ST_17: tmp_2_cast7 (119)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:69
+:1  %tmp_2_cast7 = zext i12 %phi_mul to i18
+
+ST_17: tmp1 (120)  [1/1] 1.98ns  loc: LAB4/convolution.cpp:69
+:2  %tmp1 = add i18 %tmp_2_cast7, %tmp_6
+
+ST_17: tmp_4 (121)  [1/1] 1.98ns  loc: LAB4/convolution.cpp:69
+:3  %tmp_4 = add i18 %column_cast4, %tmp1
+
+ST_17: next_mul8 (125)  [1/1] 2.32ns
+:7  %next_mul8 = add i7 %phi_mul7, 11
+
+ST_17: sum3 (126)  [1/1] 2.32ns  loc: LAB4/convolution.cpp:67
+:8  %sum3 = add i7 %column_cast5, %phi_mul7
+
+ST_17: sum3_cast_cast (127)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+:9  %sum3_cast_cast = zext i7 %sum3 to i31
+
+ST_17: kernel4_sum (128)  [1/1] 2.82ns  loc: LAB4/convolution.cpp:67
+:10  %kernel4_sum = add i31 %sum3_cast_cast, %tmp_6_cast
+
+ST_17: StgValue_150 (137)  [1/1] 0.00ns
+.loopexit.loopexit:0  br label %.loopexit
+
+
+ <State 18>: 8.75ns
+ST_18: kernel4_sum_cast (129)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+:11  %kernel4_sum_cast = zext i31 %kernel4_sum to i32
+
+ST_18: gmem_addr_2 (130)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:67
+:12  %gmem_addr_2 = getelementptr i32* %gmem, i32 %kernel4_sum_cast
+
+ST_18: gmem_load_1_req (131)  [7/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 19>: 8.75ns
+ST_19: gmem_load_1_req (131)  [6/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 20>: 8.75ns
+ST_20: gmem_load_1_req (131)  [5/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 21>: 8.75ns
+ST_21: gmem_load_1_req (131)  [4/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 22>: 8.75ns
+ST_22: gmem_load_1_req (131)  [3/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 23>: 8.75ns
+ST_23: gmem_load_1_req (131)  [2/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 24>: 8.75ns
+ST_24: tmp_4_cast (122)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:69
+:4  %tmp_4_cast = zext i18 %tmp_4 to i32
+
+ST_24: p_addr_3 (123)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:69
+:5  %p_addr_3 = getelementptr inbounds [70756 x i32]* %empty, i32 0, i32 %tmp_4_cast
+
+ST_24: empty_9 (124)  [2/2] 3.25ns  loc: LAB4/convolution.cpp:69
+:6  %empty_9 = load i32* %p_addr_3, align 4
+
+ST_24: gmem_load_1_req (131)  [1/7] 8.75ns  loc: LAB4/convolution.cpp:69
+:13  %gmem_load_1_req = call i1 @_ssdm_op_ReadReq.m_axi.i32P(i32* %gmem_addr_2, i32 1)
+
+
+ <State 25>: 8.75ns
+ST_25: empty_9 (124)  [1/2] 3.25ns  loc: LAB4/convolution.cpp:69
+:6  %empty_9 = load i32* %p_addr_3, align 4
+
+ST_25: gmem_addr_2_read (132)  [1/1] 8.75ns  loc: LAB4/convolution.cpp:69
+:14  %gmem_addr_2_read = call i32 @_ssdm_op_Read.m_axi.i32P(i32* %gmem_addr_2)
+
+
+ <State 26>: 6.91ns
+ST_26: tmp_8 (133)  [2/2] 6.91ns  loc: LAB4/convolution.cpp:69
+:15  %tmp_8 = mul nsw i32 %empty_9, %gmem_addr_2_read
+
+
+ <State 27>: 6.91ns
+ST_27: tmp_8 (133)  [1/2] 6.91ns  loc: LAB4/convolution.cpp:69
+:15  %tmp_8 = mul nsw i32 %empty_9, %gmem_addr_2_read
+
+
+ <State 28>: 2.90ns
+ST_28: tempsum (134)  [1/1] 2.90ns  loc: LAB4/convolution.cpp:69
+:16  %tempsum = add nsw i32 %tempsum_2, %tmp_8
+
+ST_28: StgValue_168 (135)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:68
+:17  br label %.preheader
+
+
+ <State 29>: 8.75ns
+ST_29: output6_sum_cast (140)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:58
+:1  %output6_sum_cast = zext i31 %output6_sum to i32
+
+ST_29: gmem_addr_1 (141)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:58
+:2  %gmem_addr_1 = getelementptr i32* %gmem, i32 %output6_sum_cast
+
+ST_29: gmem_addr_1_req (142)  [1/1] 8.75ns  loc: LAB4/convolution.cpp:73
+:3  %gmem_addr_1_req = call i1 @_ssdm_op_WriteReq.m_axi.i32P(i32* %gmem_addr_1, i32 1)
+
+
+ <State 30>: 8.75ns
+ST_30: StgValue_172 (143)  [1/1] 8.75ns  loc: LAB4/convolution.cpp:73
+:4  call void @_ssdm_op_Write.m_axi.i32P(i32* %gmem_addr_1, i32 %tempsum_1, i4 -1)
+
+
+ <State 31>: 8.75ns
+ST_31: gmem_addr_1_resp (144)  [5/5] 8.75ns  loc: LAB4/convolution.cpp:73
+:5  %gmem_addr_1_resp = call i1 @_ssdm_op_WriteResp.m_axi.i32P(i32* %gmem_addr_1)
+
+
+ <State 32>: 8.75ns
+ST_32: gmem_addr_1_resp (144)  [4/5] 8.75ns  loc: LAB4/convolution.cpp:73
+:5  %gmem_addr_1_resp = call i1 @_ssdm_op_WriteResp.m_axi.i32P(i32* %gmem_addr_1)
+
+
+ <State 33>: 8.75ns
+ST_33: gmem_addr_1_resp (144)  [3/5] 8.75ns  loc: LAB4/convolution.cpp:73
+:5  %gmem_addr_1_resp = call i1 @_ssdm_op_WriteResp.m_axi.i32P(i32* %gmem_addr_1)
+
+
+ <State 34>: 8.75ns
+ST_34: gmem_addr_1_resp (144)  [2/5] 8.75ns  loc: LAB4/convolution.cpp:73
+:5  %gmem_addr_1_resp = call i1 @_ssdm_op_WriteResp.m_axi.i32P(i32* %gmem_addr_1)
+
+
+ <State 35>: 8.75ns
+ST_35: gmem_addr_1_resp (144)  [1/5] 8.75ns  loc: LAB4/convolution.cpp:73
+:5  %gmem_addr_1_resp = call i1 @_ssdm_op_WriteResp.m_axi.i32P(i32* %gmem_addr_1)
+
+ST_35: StgValue_178 (148)  [1/1] 0.00ns  loc: LAB4/convolution.cpp:58
+:9  br label %.preheader4
+
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 1.59ns
+The critical path consists of the following:
+	'alloca' operation ('image_count') [5]  (0 ns)
+	'store' operation of constant 0 on local variable 'image_count' [23]  (1.59 ns)
+
+ <State 2>: 4.49ns
+The critical path consists of the following:
+	'load' operation ('image_count_load', LAB4/convolution.cpp:42) on local variable 'image_count' [35]  (0 ns)
+	'add' operation ('image_count', LAB4/convolution.cpp:42) [42]  (2.9 ns)
+	'store' operation (LAB4/convolution.cpp:42) of variable 'image_count', LAB4/convolution.cpp:42 on local variable 'image_count' [43]  (1.59 ns)
+
+ <State 3>: 8.75ns
+The critical path consists of the following:
+	'getelementptr' operation ('gmem_addr', LAB4/convolution.cpp:42) [37]  (0 ns)
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 4>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 5>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 6>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 7>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 8>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 9>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:41) [38]  (8.75 ns)
+
+ <State 10>: 8.75ns
+The critical path consists of the following:
+	bus read on port 'gmem' (LAB4/convolution.cpp:41) [39]  (8.75 ns)
+
+ <State 11>: 3.25ns
+The critical path consists of the following:
+	'getelementptr' operation ('p_addr', LAB4/convolution.cpp:41) [40]  (0 ns)
+	'store' operation (LAB4/convolution.cpp:41) of variable 'gmem_addr_read', LAB4/convolution.cpp:41 on array 'empty', LAB4/convolution.cpp:13 [41]  (3.25 ns)
+
+ <State 12>: 4.49ns
+The critical path consists of the following:
+	'add' operation ('pos', LAB4/convolution.cpp:39) [59]  (2.9 ns)
+	multiplexor before 'phi' operation ('flag_1', LAB4/convolution.cpp:44) with incoming values : ('flag', LAB4/convolution.cpp:44) [62]  (1.59 ns)
+
+ <State 13>: 2.9ns
+The critical path consists of the following:
+	'phi' operation ('flag_1', LAB4/convolution.cpp:44) with incoming values : ('flag', LAB4/convolution.cpp:44) [62]  (0 ns)
+	'add' operation ('flag', LAB4/convolution.cpp:44) [64]  (2.9 ns)
+
+ <State 14>: 3.25ns
+The critical path consists of the following:
+	'phi' operation ('pos') with incoming values : ('pos', LAB4/convolution.cpp:48) [70]  (0 ns)
+	'getelementptr' operation ('p_addr_1', LAB4/convolution.cpp:49) [76]  (0 ns)
+	'store' operation (LAB4/convolution.cpp:49) of constant 0 on array 'empty', LAB4/convolution.cpp:13 [77]  (3.25 ns)
+
+ <State 15>: 5.3ns
+The critical path consists of the following:
+	'phi' operation ('flag') with incoming values : ('flag', LAB4/convolution.cpp:77) [83]  (0 ns)
+	'icmp' operation ('icmp1', LAB4/convolution.cpp:61) [92]  (3.23 ns)
+	'select' operation ('p_position', LAB4/convolution.cpp:61) [94]  (2.07 ns)
+
+ <State 16>: 4.97ns
+The critical path consists of the following:
+	'add' operation ('flag_2_op', LAB4/convolution.cpp:77) [145]  (2.9 ns)
+	'select' operation ('flag', LAB4/convolution.cpp:77) [146]  (2.07 ns)
+
+ <State 17>: 5.14ns
+The critical path consists of the following:
+	'phi' operation ('phi_mul7') with incoming values : ('next_mul8') [112]  (0 ns)
+	'add' operation ('sum3', LAB4/convolution.cpp:67) [126]  (2.32 ns)
+	'add' operation ('kernel4_sum', LAB4/convolution.cpp:67) [128]  (2.82 ns)
+
+ <State 18>: 8.75ns
+The critical path consists of the following:
+	'getelementptr' operation ('gmem_addr_2', LAB4/convolution.cpp:67) [130]  (0 ns)
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 19>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 20>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 21>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 22>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 23>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 24>: 8.75ns
+The critical path consists of the following:
+	bus request on port 'gmem' (LAB4/convolution.cpp:69) [131]  (8.75 ns)
+
+ <State 25>: 8.75ns
+The critical path consists of the following:
+	bus read on port 'gmem' (LAB4/convolution.cpp:69) [132]  (8.75 ns)
+
+ <State 26>: 6.91ns
+The critical path consists of the following:
+	'mul' operation ('tmp_8', LAB4/convolution.cpp:69) [133]  (6.91 ns)
+
+ <State 27>: 6.91ns
+The critical path consists of the following:
+	'mul' operation ('tmp_8', LAB4/convolution.cpp:69) [133]  (6.91 ns)
+
+ <State 28>: 2.9ns
+The critical path consists of the following:
+	'add' operation ('tempsum', LAB4/convolution.cpp:69) [134]  (2.9 ns)
+
+ <State 29>: 8.75ns
+The critical path consists of the following:
+	'getelementptr' operation ('gmem_addr_1', LAB4/convolution.cpp:58) [141]  (0 ns)
+	bus request on port 'gmem' (LAB4/convolution.cpp:73) [142]  (8.75 ns)
+
+ <State 30>: 8.75ns
+The critical path consists of the following:
+	bus write on port 'gmem' (LAB4/convolution.cpp:73) [143]  (8.75 ns)
+
+ <State 31>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (LAB4/convolution.cpp:73) [144]  (8.75 ns)
+
+ <State 32>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (LAB4/convolution.cpp:73) [144]  (8.75 ns)
+
+ <State 33>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (LAB4/convolution.cpp:73) [144]  (8.75 ns)
+
+ <State 34>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (LAB4/convolution.cpp:73) [144]  (8.75 ns)
+
+ <State 35>: 8.75ns
+The critical path consists of the following:
+	bus access on port 'gmem' (LAB4/convolution.cpp:73) [144]  (8.75 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+	State 23
+	State 24
+	State 25
+	State 26
+	State 27
+	State 28
+	State 29
+	State 30
+	State 31
+	State 32
+	State 33
+	State 34
+	State 35
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

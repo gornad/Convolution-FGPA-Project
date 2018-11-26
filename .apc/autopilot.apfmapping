@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="convolution.cpp" path="C:\LAB4\convolution.cpp"/>
+    <originFiles name="convolution.h" path="C:\LAB4\convolution.h"/>
+  </source>
+  <testbench>
+    <originFiles name="globals.h" path="C:\LAB4\globals.h"/>
+    <originFiles name="test.cpp" path="C:\LAB4\test.cpp"/>
+    <originFiles name="test.h" path="C:\LAB4\test.h"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>
